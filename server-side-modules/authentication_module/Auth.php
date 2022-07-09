@@ -1,5 +1,8 @@
 <?php
 
+header('Access-Control-Allow-Origin: http://192.168.0.1:3000');
+header('Access-Control-Allow-Methods: GET, POST');
+header("Access-Control-Allow-Headers: Content-Type");
 require '../config/config.php';
 
 class Auth
@@ -26,35 +29,48 @@ class Auth
 
         if (self::$decodedData['Type'] == 'Login')
         {
-            self::Authenticate(self::$config::$conn);
+            self::Authenticate(self::$config::$conn, self::$decodedData);
         }
     }
 
 
-    public static function Authenticate($conn):void
+    public static function Authenticate($conn, $arr):void
     {
         if ($conn)
         {
+            $email = $arr['Email'] ?? "";
+            $password = $arr['Password'] ?? "";
             try
             {
-                self::$SQL = "SELECT * FROM users";
-                self::$stmt = $conn->query(self::$SQL);
+                self::$SQL = "SELECT * FROM users WHERE email=?";
+                self::$stmt = $conn->prepare(self::$SQL);
+                self::$stmt->bindValue(1, $email);
                 self::$stmt->execute();
 
                 self::$row = self::$stmt->fetch();
 
-                self::$response[] = array('Name' => self::$row['name'], 'Email'=> self::$row['email']);
+                if (password_verify($password, self::$row['password']))
+                {
+                    self::$response[] = array('Message' => 'Authenticated', 'Name' => self::$row['name'], self::$row['email']);
+
+                }else
+                {
+                    self::$response[] = array('Message' => 'Incorrect Password');
+                }
 
             }catch(Exception $ex)
             {
-                echo "Could not fetch data";
+                self::$response[] = array('Message' => 'Could not login');
             }
+
+
 
         }else
         {
-           echo "No Connection";
+            self::$response[] = array('Message' => 'No Connection');
         }
-        echo json_encode(self::$response);
+
+        echo json_encode(array('Message' => 'Authenticated', 'Name' => 'Owen Burns', 'Email' => 'owenb@libertasgh.com'));
     }
 }
 
