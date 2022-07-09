@@ -1,0 +1,65 @@
+import { Dimensions, StyleSheet } from 'react-native'
+
+export default StyleSheet.create({
+  parent: {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
+    backgroundColor: '#181818',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  topBar: {
+    width: '90%',
+    height: '15%',
+    borderWidth: 1,
+    borderColor: '#fff',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: '5%',
+  },
+  title: {
+    fontSize: 24,
+    color: '#fff',
+    alignSelf: 'center',
+  },
+  container: {
+    width: '90%',
+    height: '38%',
+    borderWidth: 1,
+    borderColor: '#fff',
+    alignSelf: 'center',
+  },
+  txtInput: {
+    width: '85%',
+    fontSize: 16,
+    borderBottomWidth: 1,
+    borderColor: '#fff',
+    alignSelf: 'center',
+    color: '#fff',
+    marginTop: 15,
+  },
+  lblForgotPassword: {
+    fontSize: 14,
+    color: '#fff',
+    alignSelf: 'flex-end',
+    marginTop: 10,
+    marginEnd: 25,
+  },
+  btnLogin: {
+    width: '50%',
+    height: '20%',
+    backgroundColor: '#C0C0C0',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 25,
+    borderRadius: 25,
+  },
+  btnCap: {
+    fontSize: 18,
+    color: '#fff',
+    alignSelf: 'center',
+  },
+})
