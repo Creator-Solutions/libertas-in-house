@@ -51,7 +51,13 @@ class Auth
 
                 if (password_verify($password, self::$row['password']))
                 {
-                    self::$response[] = array('Message' => 'Authenticated', 'Name' => self::$row['name'], self::$row['email']);
+                    self::$response[] = array
+                    (
+                        'Message' => 'Authenticated',
+                        'Name' => self::$row['name'],
+                        'Email' => self::$row['email'],
+                        'UUID' => self::$row['uuid']
+                    );
 
                 }else
                 {
