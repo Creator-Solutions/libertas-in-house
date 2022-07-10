@@ -16,10 +16,14 @@ class Config
            try
            {
                self::$conn = new PDO('pgsql:host='.self::$servername.';dbname='.self::$dbname.';',self::$username, self::$password);
+               echo "connected";
            }catch (Exception $ex)
            {
-               echo $ex;
+               echo $ex->getMessage();
            }
        }
    }
 }
+
+$config = new Config();
+$config::init();

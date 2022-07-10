@@ -26,7 +26,6 @@ const Login = ({navigation}) => {
           Password: pass,
         };
 
-        console.log(loginData.API);
 
         fetch(loginData.API, {
           method: 'POST',
@@ -42,6 +41,7 @@ const Login = ({navigation}) => {
           })
           .then((response) => {
             let data = response;
+            console.log(data);
             switch (response.Message) {
               case 'Authenticated':
                 navigation.navigate('dash', {
