@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react'
 import Login from './components/widgets/login';
-import Landing from './components/widgets/landing';
+import Dashboard from './components/widgets/Dashboard'
+import { NavigationContainer } from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import dashboard from './components/widgets/Dashboard'
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-    return <Landing />
+    return(
+      <NavigationContainer>
+          <Stack.Navigator>
+              <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{headerShown: false}}/>
+            <Stack.Screen
+              name="dash"
+              component={Dashboard}
+              options={{headerShown: false}}/>
+          </Stack.Navigator>
+      </NavigationContainer>
+    )
 }
 
 export default App;

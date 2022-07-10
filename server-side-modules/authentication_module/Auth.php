@@ -55,16 +55,12 @@ class Auth
 
                 }else
                 {
-                    self::$response[] = array('Message' => 'Incorrect Password');
+                    self::$response[] = array('Message' => 'Incorrect Password or Email');
                 }
-
             }catch(Exception $ex)
             {
                 self::$response[] = array('Message' => 'Could not login');
             }
-
-
-
         }else
         {
             self::$response[] = array('Message' => 'No Connection');

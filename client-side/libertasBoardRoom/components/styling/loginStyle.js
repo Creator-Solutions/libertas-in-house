@@ -20,10 +20,14 @@ export default StyleSheet.create({
     position: 'absolute',
     top: '5%',
   },
+  logo:{
+    alignSelf:'center',
+  },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     color: '#fff',
     alignSelf: 'center',
+    marginTop: 10,
   },
   err:{
     width: '90%',

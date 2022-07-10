@@ -4,11 +4,12 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StatusBar,
+  StatusBar, Image,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styling/loginStyle';
 import {loginData} from "../constants";
+import logo from '../images/icon.png';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -43,7 +44,7 @@ const Login = ({navigation}) => {
             let data = response;
             switch (response.Message) {
               case 'Authenticated':
-                navigation.navigate('', {
+                navigation.navigate('dash', {
                   Name: data.Name,
                   Email: data.Email
                 });
@@ -67,6 +68,7 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.parent}>
       <View style={styles.topBar}>
+        <Image source={logo} style={styles.logo}/>
         <Text style={styles.title}>Login</Text>
       </View>
       <View style={styles.err}>
