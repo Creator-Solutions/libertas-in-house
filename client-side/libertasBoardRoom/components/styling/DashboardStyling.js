@@ -8,7 +8,6 @@ export default StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly'
   },
   topBar:{
     width: '100%',
@@ -67,6 +66,7 @@ export default StyleSheet.create({
     borderWidth: 0,
     borderColor: '#fff',
     alignSelf:'center',
+    marginTop: '70%',
   },
   meetingTitle:{
     color: '#F5F5F5FD',
@@ -112,7 +112,7 @@ export default StyleSheet.create({
     width: '95%',
     height: '30%',
     position: 'absolute',
-    bottom: '7%',
+    bottom: '8%',
     borderWidth: 0,
     borderColor: '#fff',
     alignSelf:'center',
@@ -124,7 +124,7 @@ export default StyleSheet.create({
   },
   meeting:{
     width: '95%',
-    flex: 1,
+    flex:1,
     borderWidth: 0,
     borderColor: '#fff',
     alignSelf:'center',
@@ -134,24 +134,27 @@ export default StyleSheet.create({
   },
   scroller:{
     width: '95%',
+    flex:1,
     zIndex: 1001,
     position:'absolute',
+    display:'flex',
+    flexDirection:'column',
   },
   block:{
     width: '90%',
-    height: '25%',
+    height: 45,
     borderWidth: 0,
     borderColor: '#fff',
     justifyContent:'center',
     display:'flex',
     flexDirection:'row',
-    marginTop: 10,
+    marginTop: 15,
+    alignSelf:'center',
   },
   sep:{
-    width: '5%',
+    width: '98%',
     borderWidth: 1,
     borderColor: '#fff',
-    marginStart: '2%',
     alignSelf:'center',
   },
   mtBlock:{
@@ -163,12 +166,23 @@ export default StyleSheet.create({
     display:'flex',
     flexDirection:'row',
     borderRadius:15,
-    backgroundColor:'#03506F',
+    position:'absolute',
+    zIndex: 1001,
+    alignSelf:'center',
+  },
+  mtOdd:{
+    backgroundColor:'#4169e1'
+  },
+  mtEven:{
+    backgroundColor:'#ffa6c9',
   },
   mtCap:{
     alignSelf:'center',
     color: '#F5F5F5FD',
-    fontSize: 16,
-    marginStart: '1%',
+    fontSize: 18,
+    marginStart: '5%',
+  },
+  mtEvenCap:{
+    color:'#111',
   }
 })

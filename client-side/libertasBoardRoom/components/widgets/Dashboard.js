@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import styles from '../styling/DashboardStyling';
 import profile from '../images/profile.png';
@@ -6,10 +6,23 @@ import CalenderView from './CalenderView'
 import scheduled from '../images/sched.png';
 import current from '../images/current.png';
 import finished from '../images/finished.png';
+import {meetings, checkDayTime} from '../modules/Meetings';
 
+const SCHEDULE = 10000;
 
 const Dashboard = () => {
   const [myMeetings, setMyMeetings] = useState([]);
+  const [err, setError] = useState('');
+  let id = 'a0f8ced5-2e14-4f90-a026-b10be3c7ad15';
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      meetings(id, myMeetings, setMyMeetings);
+    }, SCHEDULE);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return(
     <View style={styles.parent}>
       <View style={styles.topBar}>
@@ -55,12 +68,22 @@ const Dashboard = () => {
         <View style={styles.meeting}>
           <ScrollView contentContainerStyle={styles.scroller}>
             {
-              myMeetings.map((item, i) => {
+              myMeetings.map((item, index) => {
+                const blockStyles = [styles.mtBlock];
+                const capStyles = [styles.mtCap];
+
+                if (index % 2 !== 0) {
+                  blockStyles.push(styles.mtEven);
+                  capStyles.push(styles.mtEvenCap);
+                } else {
+                  blockStyles.push(styles.mtOdd);
+                }
                 return(
-                  <View style={styles.block} key={i}>
+                  <View style={styles.block} key={index}>
                     <View style={styles.sep}></View>
-                    <View style={styles.mtBlock}>
-                      <Text style={styles.mtCap}>item.title</Text>
+                    <View style={blockStyles}>
+                      <Text style={capStyles}>{item.Title}</Text>
+                      <Text style={capStyles}>{checkDayTime(item.Start)}-{checkDayTime(item.End)}</Text>
                     </View>
                   </View>
                 )

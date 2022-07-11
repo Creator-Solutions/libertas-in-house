@@ -3,6 +3,11 @@ let loginData = {
     header: {'Content-Type': 'application/json'},
 }
 
+let myMeetingData = {
+    API: 'http://192.168.0.119/libertas-board-room-inHouse/libertas-in-house/server-side-modules/meeting-modules/meetings.php',
+    header: {'Content-Type': 'application/json'},
+}
+
 let month = [
   'January',
   'February',
@@ -20,5 +25,6 @@ let month = [
 
 module.exports = {
     loginData: loginData,
+    meetings: myMeetingData,
     months: month,
 };
