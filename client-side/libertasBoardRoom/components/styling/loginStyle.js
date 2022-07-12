@@ -18,7 +18,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: '5%',
+    top: '10%',
   },
   logo:{
     alignSelf:'center',

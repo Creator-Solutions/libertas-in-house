@@ -20,6 +20,7 @@ const Login = ({navigation}) => {
       if (email.trim().length === 0 && pass.trim().length === 0){
         setErr('Please fill in all fields');
       }else {
+        setErr('');
         let data = {
           Type: 'Login',
           Email: email,
@@ -40,10 +41,10 @@ const Login = ({navigation}) => {
               return {};
             }
           })
-          .then((response) => {
-            let data = response;
-            console.log(data);
-            switch (response.Message) {
+          .then((res) => {
+            console.log('Data' + res);
+
+            switch (res.Message) {
               case 'Authenticated':
                 navigation.navigate('dash', {
                   Name: data.Name,
@@ -61,8 +62,8 @@ const Login = ({navigation}) => {
                 break;
             }
           }).catch((err) => {
-          console.log(err);
-        });
+            console.log(err);
+        })
       }
   }
 

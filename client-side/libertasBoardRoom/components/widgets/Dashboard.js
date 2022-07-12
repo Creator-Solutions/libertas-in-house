@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, StatusBar } from 'react-native'
 import styles from '../styling/DashboardStyling';
 import profile from '../images/profile.png';
 import CalenderView from './CalenderView'
@@ -7,7 +7,9 @@ import scheduled from '../images/sched.png';
 import current from '../images/current.png';
 import finished from '../images/finished.png';
 import {meetings, checkDayTime} from '../modules/Meetings';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
+const Drawer = createDrawerNavigator();
 const SCHEDULE = 10000;
 
 const Dashboard = () => {
@@ -26,10 +28,10 @@ const Dashboard = () => {
   return(
     <View style={styles.parent}>
       <View style={styles.topBar}>
-       <View style={styles.leftBar}>
-        <Text style={styles.date}>Mon, Jul 10, 2022</Text>
-        <Text style={styles.title}>Daily Activity</Text>
-       </View>
+        <View style={styles.leftBar}>
+          <Text style={styles.date}>Mon, Jul 10, 2022</Text>
+          <Text style={styles.title}>Daily Activity</Text>
+        </View>
 
         <TouchableOpacity
           name={'btnProfile'}
@@ -92,7 +94,7 @@ const Dashboard = () => {
           </ScrollView>
         </View>
       </View>
-
+      <StatusBar backgroundColor={'#181818'} />
     </View>
   );
 }

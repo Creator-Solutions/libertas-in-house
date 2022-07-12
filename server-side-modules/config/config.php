@@ -23,3 +23,6 @@ class Config
        }
    }
 }
+
+$config = new Config();
+$config::init();
