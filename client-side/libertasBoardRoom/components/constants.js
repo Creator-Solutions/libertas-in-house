@@ -8,7 +8,7 @@ let myMeetingData = {
     header: {'Content-Type': 'application/json'},
 }
 
-let month = [
+let months = [
   'January',
   'February',
   'March',
@@ -23,8 +23,15 @@ let month = [
   'December',
 ]
 
+const get_Month = () => {
+ let today = new Date().getDay();
+ let month = new Date().getMonth();
+ return `${today} ${months[month]}`;
+}
+
 module.exports = {
     loginData: loginData,
     meetings: myMeetingData,
-    months: month,
+    months: months,
+    month: get_Month,
 };

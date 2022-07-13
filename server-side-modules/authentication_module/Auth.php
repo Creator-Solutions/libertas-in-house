@@ -27,6 +27,7 @@ class Auth
         self::$encodedData = file_get_contents('php://input');
         self::$decodedData = json_decode(self::$encodedData, true);
 
+
         if (self::$decodedData['Type'] == 'Login')
         {
             self::Authenticate(self::$config::$conn, self::$decodedData);
@@ -42,27 +43,33 @@ class Auth
             $password = $arr['Password'] ?? "";
             try
             {
-                self::$SQL = "SELECT * FROM users WHERE email=?";
+                self::$SQL = "SELECT id, email, username, password FROM users WHERE email=?";
                 self::$stmt = $conn->prepare(self::$SQL);
                 self::$stmt->bindValue(1, $email);
                 self::$stmt->execute();
 
                 self::$row = self::$stmt->fetch();
 
-                if (password_verify($password, self::$row['password']))
-                {
-                    self::$response[] = array
-                    (
-                        'Message' => 'Authenticated',
-                        'Name' => self::$row['name'],
-                        'Email' => self::$row['email'],
-                        'UUID' => self::$row['uuid']
-                    );
+                if (self::$row){
+                    if (password_verify($password, self::$row['password']))
+                    {
+                        self::$response[] = array
+                        (
+                            'Message' => 'Authenticated',
+                            'Name' => self::$row['username'],
+                            'Email' => self::$row['email'],
+                            'UUID' => self::$row['id']
+                        );
 
+                    }else
+                    {
+                        self::$response[] = array('Message' => 'Incorrect Password or Email');
+                    }
                 }else
                 {
-                    self::$response[] = array('Message' => 'Incorrect Password or Email');
+                    self::$response[] = array('Message' => 'No records found');
                 }
+
             }catch(Exception $ex)
             {
                 self::$response[] = array('Message' => 'Could not login');
@@ -72,7 +79,7 @@ class Auth
             self::$response[] = array('Message' => 'No Connection');
         }
 
-        echo json_encode(array('Message' => 'Authenticated', 'Name' => 'Owen Burns', 'Email' => 'owenb@libertasgh.com'));
+        echo json_encode(self::$response);
     }
 }
 

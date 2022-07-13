@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
   },
   month:{
     fontSize: 26,
-    color: '#fff',
+    color: '#111',
     marginStart: '3%',
   },
   Calendar: {
     width: '98%',
     height: '85%',
     borderWidth: 0,
-    borderColor: '#111',
+    borderColor: '#fff',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderColor: '#111',
     justifyContent: 'center',
-    backgroundColor: '#121212',
+    backgroundColor: '#404040',
     borderRadius: 10,
   },
   date: {

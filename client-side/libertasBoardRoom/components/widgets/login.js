@@ -27,8 +27,6 @@ const Login = ({navigation}) => {
           Password: pass,
         };
 
-        console.log(loginData.API);
-
         fetch(loginData.API, {
           method: 'POST',
           headers: loginData.header,
@@ -42,24 +40,18 @@ const Login = ({navigation}) => {
             }
           })
           .then((res) => {
-            console.log('Data' + res);
-
-            switch (res.Message) {
+            let data = res;
+            switch(data[0].Message){
               case 'Authenticated':
                 navigation.navigate('dash', {
-                  Name: data.Name,
-                  Email: data.Email
-                });
+                  Email: data[0].Email,
+                  Name: data[0].Name,
+                  UUID: data[0].UUID
+                })
                 break;
-              case 'Incorrect Password':
-                setErr('Incorrect Password');
+              case '':
                 break;
-              case 'Could not login':
-                setErr('Could not login');
-                break;
-              case 'No Connection':
-                setErr('No Connection. Check your internet connection');
-                break;
+
             }
           }).catch((err) => {
             console.log(err);
