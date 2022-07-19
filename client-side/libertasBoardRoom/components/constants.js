@@ -4,7 +4,7 @@ let loginData = {
 }
 
 let myMeetingData = {
-    API: 'http://192.168.0.119/libertas-board-room-inHouse/libertas-in-house/server-side-modules/meeting-modules/meetings.php',
+    API: 'http://192.168.0.103/libertas-board-room-inHouse/libertas-in-house/server-side-modules/meeting-modules/meetings.php',
     header: {'Content-Type': 'application/json'},
 }
 
@@ -29,9 +29,17 @@ const get_Month = () => {
  return `${today} ${months[month]}`;
 }
 
+const get_daytime = (time) => {
+  let curr_time = parseInt(time.slice(0,2));
+  const daytime = curr_time >= 12 ? 'PM':'AM';
+  return time + ' ' + daytime;
+
+}
+
 module.exports = {
     loginData: loginData,
-    meetings: myMeetingData,
+    meeting: myMeetingData,
     months: months,
     month: get_Month,
+    daytime:get_daytime,
 };

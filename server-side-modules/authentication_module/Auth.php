@@ -31,6 +31,9 @@ class Auth
         if (self::$decodedData['Type'] == 'Login')
         {
             self::Authenticate(self::$config::$conn, self::$decodedData);
+        }elseif (self::$decodedData['Type'] == 'Register')
+        {
+            self::Register(self::$config::$conn, self::$decodedData);
         }
     }
 
@@ -77,6 +80,39 @@ class Auth
         }else
         {
             self::$response[] = array('Message' => 'No Connection');
+        }
+
+        echo json_encode(self::$response);
+    }
+
+    public static function Register($conn, $arr)
+    {
+        if ($conn)
+        {
+            $email = $arr['Email'] ?? '';
+            $fullName = $arr['Name'] ?? '';
+            $password = $arr['Password'] ?? '';
+
+            try
+            {
+                self::$SQL = 'INSERT INTO users(email, password, username) VALUES (?, ?, ?)';
+                self::$stmt = $conn->prepare(self::$SQL);
+                self::$stmt->bindValue(1, $email);
+                self::$stmt->bindValue(2, password_hash($password, PASSWORD_ARGON2ID));
+                self::$stmt->bindValue(3, $fullName);
+
+                self::$stmt->execute();
+
+                self::$response[] = array('Message' => 'Success');
+
+            }catch (Exception $ex)
+            {
+                self::$response[] = array('Message' => 'Could not create account');
+            }
+
+        }else
+        {
+            self::$response[] = array('Message' => 'Could not connect to server');
         }
 
         echo json_encode(self::$response);
